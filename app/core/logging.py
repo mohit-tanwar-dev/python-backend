@@ -26,4 +26,6 @@ def configure_logging() -> None:
     root.setLevel(level)
 
     # Quiet down noisy third-party loggers
-    logging.getLogger("uvicorn.access").setLevel(logging.WARNING if not settings.debug else logging.INFO)
+    logging.getLogger("uvicorn.access").setLevel(
+        logging.WARNING if not settings.debug else logging.INFO
+    )
