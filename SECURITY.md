@@ -2,16 +2,17 @@
 
 ## Supported versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.1.x   | ✅ Security fixes  |
-| < 0.1   | ❌ Not supported   |
+| Version | Supported      |
+| ------- | -------------- |
+| 0.1.x   | Security fixes |
+| < 0.1   | Not supported  |
 
 ## Reporting a vulnerability
 
-Please **do not** open a public GitHub issue for security vulnerabilities.
+Do not open a public GitHub issue for security vulnerabilities.
 
-Instead, email **mohitsinghtanwar000@gmail.com** with:
+Email **mohitsinghtanwar000@gmail.com** with:
+
 - A description of the issue
 - Steps to reproduce
 - Affected versions / commits
