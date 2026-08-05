@@ -4,17 +4,17 @@
 
 ## Type of change
 
-- [ ] 🐛 Bug fix (non-breaking change that fixes an issue)
-- [ ] ✨ New feature (non-breaking change that adds functionality)
-- [ ] 💥 Breaking change (would cause existing functionality to not work as expected)
-- [ ] 📝 Documentation update
-- [ ] ♻️ Refactor (no functional changes)
-- [ ] 🧪 Test additions / improvements
-- [ ] 🔧 CI / build / tooling
+- [ ] Bug fix (non-breaking change that fixes an issue)
+- [ ] New feature (non-breaking change that adds functionality)
+- [ ] Breaking change (would cause existing functionality to not work as expected)
+- [ ] Documentation update
+- [ ] Refactor (no functional changes)
+- [ ] Test additions / improvements
+- [ ] CI / build / tooling
 
 ## Checklist
 
-- [ ] My code follows the [style guide](../ruff.toml) (`ruff check .` passes)
+- [ ] My code follows the style guide (`ruff check .` passes)
 - [ ] I ran `ruff format .` and the code is formatted
 - [ ] I added / updated tests for my changes
 - [ ] `pytest -v` passes locally
