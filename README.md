@@ -7,6 +7,8 @@
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-261230?style=flat-square)](https://docs.astral.sh/ruff/)
 [![GitHub release](https://img.shields.io/github/v/release/mohit-tanwar-dev/python-backend?style=flat-square)](https://github.com/mohit-tanwar-dev/python-backend/releases)
 
+[![Code Coverage](https://img.shields.io/badge/coverage-XX%25-red?style=flat-square)](./htmlcov/index.html)
+
 FastAPI scaffold with health endpoint, structured logging, env-driven config, pytest suite, ruff/mypy, and GitHub Actions CI.
 
 ## Stack
@@ -49,6 +51,27 @@ python-backend/
 └── SECURITY.md
 ```
 
+## Development Workflow
+
+For local development, it's recommended to use a virtual environment. The project uses `ruff` for linting and formatting, and `mypy` for type checking. `pre-commit` hooks are configured to ensure code quality before commits.
+
+### Local Setup
+
+```bash
+# Install pre-commit hooks
+pre-commit install
+```
+
+### Running Linters and Type Checks
+
+```bash
+ruff check .
+ruff format --check .
+mypy app tests
+```
+
+These checks are also run in the CI pipeline.
+
 ## Quick start
 
 ```bash
@@ -74,6 +97,26 @@ Docker:
 docker build -t python-backend:latest .
 docker run --rm -p 8000:8000 --env-file .env python-backend:latest
 ```
+
+## Production Deployment
+
+For production deployments, it is recommended to use a production-ready ASGI server like Gunicorn with Uvicorn workers. Below are examples for running the application in a production environment.
+
+### Gunicorn with Uvicorn Workers
+
+```bash
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+```
+
+This command starts Gunicorn with 4 Uvicorn worker processes, binding to all network interfaces on port 8000.
+
+### Health Check Path
+
+The application provides a health check endpoint at `/health` (or `/api/v1/health` for the versioned API) that can be used by load balancers or container orchestration systems to verify the application's status.
+
+## Logging Configuration
+
+The application uses structured logging, configured via `app/core/logging.py`. The log level can be controlled using the `APP_LOG_LEVEL` environment variable (e.g., `INFO`, `DEBUG`, `WARNING`, `ERROR`). Logs are typically output to `stdout` and `stderr`, making them suitable for containerized environments and centralized logging solutions.
 
 ## Configuration
 
@@ -102,6 +145,10 @@ CI runs all of the above on Python 3.11 and 3.12.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Fork, branch from `main`, open a PR.
+
+## Release Process
+
+Releases are managed via GitHub releases. A new release can be cut by creating a new tag (e.g., `v1.0.0`). The CI/CD pipeline is configured to automatically build and publish artifacts upon a new tag. Changelog conventions are maintained in `CHANGELOG.md`.
 
 ## Changelog
 
