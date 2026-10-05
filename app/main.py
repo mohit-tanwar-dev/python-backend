@@ -12,6 +12,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app import __version__
+from app.api.v1.endpoints.health import health as health_endpoint
 from app.api.v1.router import api_router
 from app.core.config import settings
 from app.core.logging import configure_logging
@@ -37,11 +38,14 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Mount v1 routes
+# Mount the versioned API routes once.
 app.include_router(api_router, prefix=settings.api_v1_prefix)
 
-# Also expose a root-level /health for convenience (no API prefix)
-app.include_router(api_router, include_in_schema=False, prefix="")
+
+@app.get("/health", summary="Health check alias", include_in_schema=False)
+def health_alias() -> dict[str, object]:
+    """Expose the health payload at the root-level path without duplicating router registration."""
+    return health_endpoint()
 
 
 @app.get("/", summary="Root", include_in_schema=False)
